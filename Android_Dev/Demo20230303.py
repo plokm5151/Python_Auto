@@ -85,7 +85,7 @@ class Test:
   driver.swipe(533,1655,533,600,500)
   time.sleep(1)
  time.sleep(2)
- driver.find_element(By.XPATH, '//android.view.View[@content-desc="第 2 個分頁 (共 3 個)"]').click()
+ driver.find_element(By.XPATH, '//android.view.View[@content-desc="第 3 個分頁 (共 3 個)"]').click()
  time.sleep(1)
  #+貼文
  driver.find_element(By.XPATH, '//android.widget.Button[@content-desc="貼文"]').click()
