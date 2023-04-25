@@ -1,6 +1,5 @@
 from Android_Dev_Def import Test
 
-Test().connect_to_device()
 Test().random_number()
 
 Test().login()
