@@ -44,12 +44,29 @@ post_page_pet_first_picture_y = 900
 private_group_x = 121
 private_group_y = 997
 
+pick_group_picture_x = 550
+pick_group_picture_y = 1000
+
+others_pet_x = 120
+others_pet_y = 2143
+
+
+create_group_page_start_x = 500
+create_group_page_start_y = 1000
+create_group_page_end_x = 536
+create_group_page_end_y = 295
+
+
+send_friend_request_to_another_user_x = 920
+send_friend_request_to_another_user_y = 520
 
 # Xpath
 #一開始的登入按鈕
 login_button_xpath = '//android.widget.Button[@content-desc="登入"]'
 #輸入email的欄位
 email_text_xpath = '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.ImageView/android.view.View/android.widget.EditText[1]'
+#鍵盤彈起後輸入email的欄位
+email_text_after_keyboard_xpath = '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.ImageView/android.widget.ScrollView/android.widget.EditText[1]'
 #輸入密碼的欄位
 passWD_text_xpath = '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.ImageView/android.widget.ScrollView/android.widget.EditText[2]'
 #點擊空白處收下鍵盤
@@ -61,11 +78,11 @@ setting_page_xpath = '//android.view.View[@content-desc="設定"]'
 #進入個人頁面
 personal_profile_xpath = '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.ScrollView/android.widget.Button[1]'
 #點擊使用者id
-user_ID_xpath = '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText'
+user_ID_xpath = '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.ScrollView/android.widget.EditText'
 #點擊性別收下按鍵
 click_gender_xpath = '//android.view.View[@content-desc="性別"]'
 #點擊使用者圖片
-user_photo_stickers_xpath = '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.Button[3]'
+user_photo_stickers_xpath = '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.ScrollView/android.widget.Button[1]'
 #同意取用圖片
 allow_access_photo_xpath = '/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.Button[1]'
 #挑選第一張圖片
@@ -130,6 +147,8 @@ post_content_after_keyboard_xpath = '/hierarchy/android.widget.FrameLayout/andro
 post_xpath = '//android.view.View[@content-desc="分享"]'
 #第三個分頁
 post_third_page_xpath = '//android.view.View[@content-desc="第 3 個分頁 (共 3 個)"]'
+#第三個分頁第一張照片
+post_third_page_first_picture_xpath = '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.view.View/android.widget.ScrollView/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.ImageView[1]'
 #新增照片
 add_picture_xpath = '//android.widget.Button[@content-desc="照片"]'
 #挑選第一張照片
@@ -148,3 +167,27 @@ group_picture_xpath = '/hierarchy/android.widget.FrameLayout/android.widget.Line
 private_group_xpath = '//android.widget.RadioButton[@content-desc="私密 (僅獲得邀請的寵友加入)"]'
 #挑選寵群照片
 pick_group_picture_xpath = '//android.widget.LinearLayout[@content-desc="1683254220757.jpg, 2.71 KB, 10:37"]/android.widget.RelativeLayout/android.widget.FrameLayout[1]/android.widget.ImageView[2]'
+#確定選取
+pick_group_picture_compeleted_xpath = '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/androidx.appcompat.widget.LinearLayoutCompat/android.widget.TextView'
+#寵群名稱輸入
+group_name_xpath = '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.ScrollView/android.widget.EditText'
+#鍵盤談起後的寵群名稱輸入
+group_name_after_keyborad_xpath = '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.ScrollView/android.widget.EditText'
+#點擊群組名稱使鍵盤退下
+click_group_name_xpath = '//android.view.View[@content-desc="群組名稱"]'
+#建立寵群
+create_group_compeleted_xpath = '//android.widget.Button[@content-desc="建立"]'
+#確認建立寵群完成後返回
+confirming_creation_pet_group_return_xpath = '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.view.View[1]'
+#進入搜尋寵友
+enter_search_friends_xpath = '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.ImageView[5]'
+#輸入暱稱
+enter_friends_name_xpath = '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.widget.EditText'
+#談起鍵盤後的輸入暱稱
+enter_friends_name_after_keyboard_xpath = '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.widget.EditText'
+#送出交友請求後返回
+after_send_friend_request_and_return_xpath = '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.view.View[1]'
+#登出
+log_out_xpath = '//android.widget.Button[@content-desc="登出"]'
+#確定登出
+log_out_button_xpath = '//android.widget.Button[@content-desc="登出"]'

@@ -2,6 +2,7 @@ from appium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoSuchElementException
 import time
 import random
 from time import sleep
@@ -15,8 +16,8 @@ driver = webdriver.Remote('http://127.0.0.1:4723/wd/hub', Def_file.caps)
 wait = WebDriverWait(driver, 15)
 
 
-def swipe_page(self, driver):
-    for i in range(1, 10):
+def swipe_page(self, driver,times):
+    for i in range(1, times):
 
         driver.implicitly_wait(10)
 
@@ -28,19 +29,26 @@ def random_number():
     return random.randint(1,999999999999999999)
 
 
-def delete_all_picture(self,driver):
+
+def delete_all_picture(self,driver,wait):
 
     driver.implicitly_wait(10)
 
-    driver.tap([(Def_file.post_page_pet_first_picture_x,Def_file.post_page_pet_first_picture_y)],1000)
+    driver.tap([(Def_file.post_page_pet_first_picture_x,Def_file.post_page_pet_first_picture_y)],2000)
 
-    delete_post_page_pet_picture_wait = wait.until(EC.visibility_of_element_located((By.XPATH, Def_file.delete_post_page_pet_picture_xpath)))
-    driver.find_element(By.XPATH, Def_file.delete_post_page_pet_picture_xpath).click()
+    #post_third_page_first_picture_wait = wait.until(EC.visibility_of_element_located((By.XPATH, Def_file.post_third_page_first_picture_xpath)))
+    #driver.find_element(By.XPATH, Def_file.post_third_page_first_picture_xpath).click()
+
+    try:
+        delete_post_page_pet_picture_wait = wait.until(EC.visibility_of_element_located((By.XPATH, Def_file.delete_post_page_pet_picture_xpath)))
+        driver.find_element(By.XPATH, Def_file.delete_post_page_pet_picture_xpath).click()
+    except NoSuchElementException:
+        print("Element not found, ccontinuing with the rest of the code.")
+
 
 
 
 def add_ten_picture(self,driver,wait):
-#    for i in range(0,3):
 
     driver.implicitly_wait(10)
 
@@ -58,18 +66,20 @@ def add_ten_picture(self,driver,wait):
 
 class Test:
 
-    def login(self,driver,wait,frank6_email,passWD):
+    def login(self,driver,wait,user_email,user_passWD):
         Login_wait = wait.until(EC.visibility_of_element_located((By.XPATH, Def_file.login_button_xpath)))
         driver.find_element(By.XPATH, Def_file.login_button_xpath).click()
 
         email_wait = wait.until(EC.visibility_of_element_located((By.XPATH, Def_file.email_text_xpath)))
         driver.find_element(By.XPATH, Def_file.email_text_xpath).click()
-        driver.find_element(By.XPATH, Def_file.email_text_xpath).send_keys('frank.chen+6@keeda.com.tw')
+
+        email_text_after_keyboard_wait = wait.until(EC.visibility_of_element_located((By.XPATH, Def_file.email_text_after_keyboard_xpath)))
+        driver.find_element(By.XPATH, Def_file.email_text_after_keyboard_xpath).send_keys(user_email)
 
         passWD_wait = wait.until(EC.visibility_of_element_located((By.XPATH, Def_file.passWD_text_xpath)))
         driver.find_element(By.XPATH, Def_file.passWD_text_xpath).click()
         time.sleep(1)
-        driver.find_element(By.XPATH, Def_file.passWD_text_xpath).send_keys('aPPLEPLOKM123')
+        driver.find_element(By.XPATH, Def_file.passWD_text_xpath).send_keys(user_passWD)
 
         click_nothing_wait = wait.until(EC.visibility_of_element_located((By.XPATH, Def_file.click_nothing_xpath)))
         driver.find_element(By.XPATH, Def_file.click_nothing_xpath).click()
@@ -192,7 +202,7 @@ class Test:
 
         driver.swipe(560,880,560,1600,500)
 
-        swipe_page(self,driver)
+        swipe_page(self,driver,10)
 
         add_post_wait = wait.until(EC.visibility_of_element_located((By.XPATH, Def_file.add_post_xpath)))
         driver.find_element(By.XPATH, Def_file.add_post_xpath).click()
@@ -221,14 +231,14 @@ class Test:
 
         driver.implicitly_wait(15)
 
-        swipe_page(self,driver)
+        swipe_page(self,driver,10)
 
         post_third_page_wait = wait.until(EC.visibility_of_element_located((By.XPATH, Def_file.post_third_page_xpath)))
         driver.find_element(By.XPATH, Def_file.post_third_page_xpath).click()
 
         add_ten_picture(self,driver,wait)
 
-        delete_all_picture(self,driver)
+        delete_all_picture(self,driver,wait)
 
         driver.implicitly_wait(10)
 
@@ -244,13 +254,84 @@ class Test:
         group_picture_wait = wait.until(EC.visibility_of_element_located((By.XPATH, Def_file.group_picture_xpath)))
         driver.find_element(By.XPATH, Def_file.group_picture_xpath).click()
 
-        pick_group_picture_wait = wait.until(EC.visibility_of_element_located((By.XPATH, Def_file.pick_group_picture_xpath)))
-        driver.find_element(By.XPATH, Def_file.pick_group_picture_xpath).click()
+        #driver.find_element(By.XPATH, Def_file.pick_group_picture_xpath).click()
+        #點擊圖片
+        driver.tap([(Def_file.pick_group_picture_x,Def_file.pick_group_picture_y)],500)
 
-        #private_group_wait = wait.until(EC.visibility_of_element_located((By.XPATH, Def_file.private_group_xpath)))
-        #driver.find_element(By.XPATH, Def_file.private_group_xpath).click()
-
+        pick_group_picture_compeleted_wait = wait.until(EC.visibility_of_element_located((By.XPATH, Def_file.pick_group_picture_compeleted_xpath)))
+        driver.find_element(By.XPATH, Def_file.pick_group_picture_compeleted_xpath).click()
+        #點擊私密群組
+        driver.implicitly_wait(10)
         driver.tap([(Def_file.private_group_x,Def_file.private_group_y)])
+        #點擊其他動物
+        driver.implicitly_wait(10)
+        driver.tap([(Def_file.others_pet_x,Def_file.others_pet_y)])
+        #將頁面滑動至底部
+
+        swipe_page(self,driver,3)
+
+        group_name_wait = wait.until(EC.visibility_of_element_located((By.XPATH, Def_file.group_name_xpath)))
+        driver.find_element(By.XPATH, Def_file.group_name_xpath).click()
+
+        group_name_after_keyboard_wait = wait.until(EC.visibility_of_element_located((By.XPATH, Def_file.group_name_after_keyborad_xpath)))
+        driver.find_element(By.XPATH, Def_file.group_name_after_keyborad_xpath).send_keys('@1!#2!3@4#5%6&*7@8#9)A(B_C_D(E)FG')
+
+        #click_group_name_wait = wait.until(EC.visibility_of_element_located((By.XPATH, Def_file.click_group_name_xpath)))
+        #driver.find_element(By.XPATH, Def_file.click_group_name_xpath).click()
+
+        driver.swipe(Def_file.create_group_page_start_y,Def_file.create_group_page_start_y,Def_file.create_group_page_end_x,Def_file.create_group_page_end_y)
+
+        create_group_compeleted_wait = wait.until(EC.visibility_of_element_located((By.XPATH, Def_file.create_group_compeleted_xpath)))
+        driver.find_element(By.XPATH, Def_file.create_group_compeleted_xpath).click()
+
+        driver.implicitly_wait(10)
+
+        confirming_creation_pet_group_return_wait = wait.until(EC.visibility_of_element_located((By.XPATH, Def_file.confirming_creation_pet_group_return_xpath)))
+        driver.find_element(By.XPATH, Def_file.confirming_creation_pet_group_return_xpath).click()
+
+
+    def search_friends(self,driver,wait):
+
+        enter_search_friends_wait = wait.until(EC.visibility_of_element_located((By.XPATH, Def_file.enter_search_friends_xpath)))
+        driver.find_element(By.XPATH, Def_file.enter_search_friends_xpath).click()
+
+        #滑動整個寵友頁面
+        swipe_page(self,driver,10)
+
+        enter_friends_name_wait = wait.until(EC.visibility_of_element_located((By.XPATH, Def_file.enter_friends_name_xpath)))
+        driver.find_element(By.XPATH, Def_file.enter_friends_name_xpath).click()
+
+        enter_friends_name_after_keyboard_wait = wait.until(EC.visibility_of_element_located((By.XPATH, Def_file.enter_friends_name_after_keyboard_xpath)))
+        driver.find_element(By.XPATH, Def_file.enter_friends_name_after_keyboard_xpath).send_keys("自動化測試帳號")
+
+        driver.implicitly_wait(10)
+
+        driver.tap([(Def_file.send_friend_request_to_another_user_x,Def_file.send_friend_request_to_another_user_y)])
+
+        after_friend_request_and_return_wait = wait.until(EC.visibility_of_element_located((By.XPATH, Def_file.after_send_friend_request_and_return_xpath)))
+        driver.find_element(By.XPATH, Def_file.after_send_friend_request_and_return_xpath).click()
+
+
+    def log_out(self,driver,wait):
+
+        setting_page_wait = wait.until(EC.visibility_of_element_located((By.XPATH, Def_file.setting_page_xpath)))
+        driver.find_element(By.XPATH, Def_file.setting_page_xpath).click()
+
+        personal_profile_wait = wait.until(EC.visibility_of_element_located((By.XPATH, Def_file.personal_profile_xpath)))
+        driver.find_element(By.XPATH, Def_file.personal_profile_xpath).click()
+
+        log_out_wait =  wait.until(EC.visibility_of_element_located((By.XPATH, Def_file.log_out_xpath)))
+        driver.find_element(By.XPATH, Def_file.log_out_xpath).click()
+
+        log_out_wait2 = wait.until(EC.visibility_of_element_located((By.XPATH, Def_file.log_out_xpath)))
+        driver.find_element(By.XPATH, Def_file.log_out_xpath).click()
+
+
+
+    def inspect_page_and_agree_friend_request(self,driver,wait):
+
+        chat_page_wait = wait.until(EC.visibility_of_element_located((By.XPATH, Def_file.chat_page_xpath)))
+        driver.find_element(By.XPATH, Def_file.chat_page_xpath).click()
 
 
 
@@ -271,11 +352,13 @@ class Test:
 
 
 
-
-#Test().login(driver,wait,Def_file.frank6_email,Def_file.passWD)
-#Test().setting_profile(driver,wait)
-#Test().post(driver,wait)
+Test().login(driver,wait,Def_file.frank6_email,Def_file.passWD)
+Test().setting_profile(driver,wait)
+Test().post(driver,wait)
 Test().chat_page(driver,wait)
+Test().search_friends(driver,wait)
+Test().log_out(driver,wait)
+Test().login(driver,wait,Def_file.test_account_email,Def_file.passWD)
 #Test().unicode_test(driver)
 
 
